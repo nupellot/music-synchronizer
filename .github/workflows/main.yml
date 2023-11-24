@@ -2,11 +2,14 @@ name: Deploy to Railway
 on:
   push:
     branches:
-      - maxim
+      - ваша_ветка
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -16,6 +19,9 @@ jobs:
         run: |
           curl -sSL https://get.railway.app | bash
           export PATH=$PATH:$HOME/.railway/bin
+
+      - name: Login to Railway with Token
+        run: railway login -t $RAILWAY_TOKEN
 
       - name: Deploy to Railway
         run: railway up
