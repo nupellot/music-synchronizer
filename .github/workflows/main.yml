@@ -1,1 +1,21 @@
-python3
+name: Deploy to Railway
+on:
+  push:
+    branches:
+      - maxim
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Railway CLI
+        run: |
+          curl -sSL https://get.railway.app | bash
+          export PATH=$PATH:$HOME/.railway/bin
+
+      - name: Deploy to Railway
+        run: railway up
