@@ -1,7 +1,7 @@
 # app.py
 import string
 import random
-
+from pydub import AudioSegment
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from database.sql_provider import SQLProvider
@@ -16,7 +16,7 @@ class Room:
         self.time_stamp = None
         self.is_playing = False
 
-        self.queue = ["1.mp3"]
+        self.queue = []
         # Генерация 2 случайных цифр
         digits = ''.join(random.choices(string.digits, k=2))
         # Генерация 2 случайных букв
@@ -27,8 +27,22 @@ class Room:
         self.code = random_code.upper()
         self.messages = [f"Комната {self.code} создана"]
 
+    def add_to_queue(self, title: str, author: str, filename: str):
+        print("adding to queue")
+        self.queue.append({
+            "title": title,
+            "author": author,
+            "filename": f"static/music/{filename}"
+        })
+        print("added")
+        print("self.queue[-1][\"filename\"] ", self.queue[-1]["filename"])
+        print(AudioSegment.from_mp3(self.queue[-1]["filename"]))
+        self.queue[-1]["duration"] = AudioSegment.from_mp3(self.queue[-1]["filename"]).duration
+        print("duration added")
+
 
 room = Room()
+room.add_to_queue("Ya ebu sobak", "SHaman", "1.mp3")
 
 
 @app.route('/')
