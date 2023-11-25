@@ -94,5 +94,5 @@ def select(db_config: dict, sql: str) -> Tuple[Tuple, List[str]]:
     return result, schema
 
 if __name__ == '__main__':
-    app.run(host='viaduct.proxy.rlwy.net', port=59582)
+    app.run(host='0.0.0.0', port=59582)
     select(current_app.config['db_config'], "SELECT * FROM test")
