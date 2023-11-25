@@ -95,4 +95,6 @@ def select(db_config: dict, sql: str) -> Tuple[Tuple, List[str]]:
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=59582)
-    select(current_app.config['db_config'], "SELECT * FROM test")
+    print("Flask приложение успешно запущено!")
+    data, schema = select(current_app.config['db_config'], "SELECT * FROM test")
+    print(data)
