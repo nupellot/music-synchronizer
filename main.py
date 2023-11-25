@@ -17,7 +17,7 @@ from pymysql.err import OperationalError
 app = Flask(__name__)
 
 app.config['db_config'] = {
-    "host": "viaduct.proxy.rlwy.net",
+    "host": "viaduct.proxy.rlwy.net:59582",
     "user": "root",
     "password": "fa-G1daFchA5CAgCCh4fAH5a-hFFEd3f",
     "database": "railway"
@@ -94,5 +94,5 @@ def select(db_config: dict, sql: str) -> Tuple[Tuple, List[str]]:
     return result, schema
 
 if __name__ == '__main__':
-    app.run(host='viaduct.proxy.rlwy.net', port=59582)
+    app.run(host='viaduct.proxy.rlwy.net:59582', port=3306)
     select(current_app.config['db_config'], "SELECT * FROM test")
