@@ -12,8 +12,9 @@ socketio = SocketIO(app)
 
 class Room:
     def __init__(self):
-        current_track = None
-        current_time_stamp = None
+        self.track = None
+        self.time_stamp = None
+        self.is_playing = False
 
         self.queue = ["1.mp3"]
         # Генерация 2 случайных цифр
@@ -27,8 +28,6 @@ class Room:
         self.messages = [f"Комната {self.code} создана"]
 
 
-
-
 room = Room()
 
 
@@ -36,9 +35,9 @@ room = Room()
 def index():
     return render_template('index_chat.html', room=room)
 
-@socketio.on('new_message')
-def handle_message(data):
 
+@socketio.on('new_message')
+def new_message(data):
     print('Received message:', data)
 
     # Добавляем сообщение к глобальной переменной
@@ -46,6 +45,34 @@ def handle_message(data):
 
     # Отправляем сообщение всем подключенным клиентам
     socketio.emit('new_message', data)
+
+
+def update_clients():
+    if room.is_playing:
+        socketio.emit('play')
+    if not room.is_playing:
+        socketio.emit('pause')
+    socketio.emit('seek', room.time_stamp)
+
+
+@socketio.on("pause")
+def pause(time_stamp):
+    room.time_stamp = time_stamp
+    room.is_playing = False
+    update_clients()
+
+
+@socketio.on("play")
+def play(time_stamp):
+    room.time_stamp = time_stamp
+    room.is_playing = True
+    update_clients()
+
+
+@socketio.on("seek")
+def seek(time_stamp):
+    room.time_stamp = time_stamp
+    update_clients()
 
 
 if __name__ == '__main__':
