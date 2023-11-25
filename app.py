@@ -4,6 +4,7 @@ import random
 from pydub import AudioSegment
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+from mutagen.mp3 import MP3
 from database.sql_provider import SQLProvider
 
 app = Flask(__name__)
@@ -35,9 +36,11 @@ class Room:
             "filename": f"static/music/{filename}"
         })
         print("added")
-        print("self.queue[-1][\"filename\"] ", self.queue[-1]["filename"])
-        print(AudioSegment.from_mp3(self.queue[-1]["filename"]))
-        self.queue[-1]["duration"] = AudioSegment.from_mp3(self.queue[-1]["filename"]).duration
+        address = self.queue[-1]["filename"]
+        print("address ", address)
+        f = MP3(address)
+        # print(AudioSegment.from_mp3(self.queue[-1]["filename"]))
+        self.queue[-1]["duration"] = f.info.length
         print("duration added")
 
 

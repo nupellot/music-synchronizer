@@ -46,7 +46,7 @@
             <input type="file" multiple>
         </div>
 
-        <audio src="static/music/{{ track["filename"] }}" id="Player"></audio>
+        <audio src="static/music/{{ room.queue[-1]["filename"] }}" id="Player"></audio>
         <div>
             <button class="control-button play-button" onclick="requestPlay()">Play</button>
             <button class="control-button pause-button" onclick="requestPause()">Pause</button>
