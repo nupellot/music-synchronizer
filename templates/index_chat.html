@@ -1,36 +1,87 @@
 <!-- templates/index_chat.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Chat with Flask and WebSocket</title>
+    <title>MTS MS</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/player.css') }}">
 </head>
 <body>
-    {% for track in room.queue %}
 
-        <audio src="static/music/{{ track }}" id="Player"></audio>
+
+<main>
+    <div class="left-part">
+        <div class="code-block">
+            <img class="qr-code" src="" alt="">
+
+            <div class="text-code">{{ room.code }}</div>
+
+            <input type="text" class="code-input" placeholder="Код комнаты">
+        </div>
+        <div class="chat-block">
+            <div class="chat-title">Чат комнаты</div>
+            <div class="chat-messages">
+                {% for message in room.messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="right-part">
+        <div class="tracks-queue">
+            <div class="queue-title">Очередь треков</div>
+
+            {% for track in room.queue %}
+                <div class="track">
+                    <div class="track-author">{{ track["author"] }}</div>
+                    <div class="track-title">{{ track["title"] }}</div>
+                    <div class="track-duration">{{ track["duration"] }}</div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="tracks-input-area">
+            <input type="file" multiple>
+        </div>
+
+        <audio src="static/music/{{ track["filename"] }}" id="Player"></audio>
         <div>
             <button class="control-button play-button" onclick="requestPlay()">Play</button>
             <button class="control-button pause-button" onclick="requestPause()">Pause</button>
             <button class="control-button stop-button" onclick="requestStop()">Stop</button>
             <input class="control-button seeker" id="seeker" type="range" value="0" max="1000" step="1" oninput="requestSeek()">
         </div>
+    </div>
 
-    {% endfor %}
-    <ul id="chat">
-        {% for message in room.messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    <form action="" id="form" onsubmit="sendMessage(); return false;">
-        <input type="text" id="message_input" autocomplete="off" placeholder="Type your message...">
-        <button type="submit">Send</button>
-    </form>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="{{ url_for('static', filename='js/websocket.js') }}"></script>
+
+{#        {% for track in room.queue %}#}
+{##}
+{#    <audio src="static/music/{{ track }}" id="Player"></audio>#}
+{#    <div>#}
+{#        <button class="control-button play-button" onclick="requestPlay()">Play</button>#}
+{#        <button class="control-button pause-button" onclick="requestPause()">Pause</button>#}
+{#        <button class="control-button stop-button" onclick="requestStop()">Stop</button>#}
+{#        <input class="control-button seeker" id="seeker" type="range" value="0" max="1000" step="1" oninput="requestSeek()">#}
+{#    </div>#}
+{##}
+{#        {% endfor %}#}
+{#    <ul id="chat">#}
+{#                {% for message in room.messages %}#}
+{#                    <li>{{ message }}</li>#}
+{#                {% endfor %}#}
+{#    </ul>#}
+{#    <form action="" id="form" onsubmit="sendMessage(); return false;">#}
+{#        <input type="text" id="message_input" autocomplete="off" placeholder="Type your message...">#}
+{#        <button type="submit">Send</button>#}
+{#    </form>#}
+</main>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="{{ url_for('static', filename='js/websocket.js') }}"></script>
 </body>
 </html>
