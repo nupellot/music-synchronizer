@@ -7,7 +7,11 @@
     <title>Simple Chat with Flask and WebSocket</title>
 </head>
 <body>
-    <ul id="chat"></ul>
+    <ul id="chat">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
     <form action="" id="form" onsubmit="sendMessage(); return false;">
         <input type="text" id="message_input" autocomplete="off" placeholder="Type your message...">
         <button type="submit">Send</button>
@@ -17,7 +21,7 @@
     <script>
         var socket = io.connect('http://' + document.domain + ':' + location.port);
 
-        socket.on('message', function(data) {
+        socket.on('new_message', function(data) {
             var chat = document.getElementById('chat');
             var newMessage = document.createElement('li');
             newMessage.textContent = data;
@@ -27,7 +31,7 @@
         function sendMessage() {
             var messageInput = document.getElementById('message_input');
             var message = messageInput.value;
-            socket.emit('message', message);
+            socket.emit('new_message', message);
             messageInput.value = '';
         }
     </script>

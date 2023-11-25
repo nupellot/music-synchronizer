@@ -1,26 +1,48 @@
 # app.py
+import string
+import random
+
 from flask import Flask, render_template
 from flask_socketio import SocketIO
+from database.sql_provider import SQLProvider
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-# Глобальная переменная для хранения сообщений
-messages = []
+
+class Room:
+    def __init__(self):
+        self.queue = []
+        # Генерация 2 случайных цифр
+        digits = ''.join(random.choices(string.digits, k=2))
+        # Генерация 2 случайных букв
+        letters = ''.join(random.choices(string.ascii_letters, k=2))
+        # Собираем код из цифр и букв
+        random_code = letters + digits
+        # Возвращаем сгенерированный код
+        self.code = random_code
+        self.messages = [f"Комната {self.code} создана"]
+
+
+
+room = Room()
+
 
 @app.route('/')
 def index():
-    return render_template('index_chat.html', messages=messages)
+    return render_template('index_chat.html', messages=room.messages)
 
-@socketio.on('message')
+@socketio.on('new_message')
 def handle_message(data):
+
     print('Received message:', data)
 
     # Добавляем сообщение к глобальной переменной
-    messages.append(data)
+    room.messages.append(data)
 
     # Отправляем сообщение всем подключенным клиентам
-    socketio.emit('message', data)
+    socketio.emit('new_message', data)
+
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
