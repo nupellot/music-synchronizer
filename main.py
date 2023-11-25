@@ -94,6 +94,7 @@ def select(db_config: dict, sql: str) -> Tuple[Tuple, List[str]]:
     return result, schema
 
 if __name__ == '__main__':
+    print("Teкст перед запуском Flask")
     app.run(host='0.0.0.0', port=59582)
     print("Flask приложение успешно запущено!")
     data, schema = select(current_app.config['db_config'], "SELECT * FROM test")
