@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн-прослушивание аудиоконтента</title>
+    <style>
+        /* Общие стили */
+        body {
+            font-family: 'Times new roman', sans-serif;
+            background: linear-gradient(to right, #87CEEB, #FFC0CB);
+            text-align: center;
+            margin: 0;
+            position: relative;
+        }
+
+        h1 {
+            color: red;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Верхнее меню */
+        .top-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 65px;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .branding {
+            position: fixed;
+            top: 40px;
+            left: -200px;
+            transform: translateY(-50%);
+            color: red;
+            font-size: 40px;
+            font-weight: bold;
+            opacity: 0;
+            animation: slideIn 0.5s ease-in-out 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                left: -200px;
+                opacity: 0;
+            }
+            to {
+                left: 20px;
+                opacity: 1;
+            }
+        }
+
+        .additional-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: orange;
+            cursor: pointer;
+        }
+
+        /* Аудиоплеер и контент */
+        audio {
+            width: 70%;
+            max-width: 400px;
+            margin: 20px 0;
+            position: fixed;
+            bottom: 15px;
+            left: 75%;
+            transform: translateX(-50%);
+        }
+
+        .connect-btn {
+            position: fixed;
+            top: 50%;
+            left: 225px;
+            transform: translateY(400%);
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .custom-textarea {
+            position: fixed;
+            top: 50%;
+            left: 175px;
+            transform: translateY(-70%);
+            width: 300px;
+            height: 300px;
+            resize: none;
+            font-size: 200px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        /* Чат */
+        .chat {
+            position: fixed;
+            top: 50%;
+            left: 100px;
+            transform: translateY(500%);
+            width: 650px;
+            resize: none;
+            font-size: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        /* Контейнер для основного контента */
+        .content-container {
+            background-color: #fff;
+            transform: translateY(-5%);
+            width: 500px;
+            height: 500px;
+            border-radius: 15px;
+            padding: 90px;
+            margin: 90px;
+        }
+
+        /* Анимация для чат и текстового поля */
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Верхнее меню -->
+<div class="top-menu">
+    <!-- Надпись "МТС музыка" -->
+    <div class="branding">МТС MUSIC</div>
+    <!-- Кнопка в правом верхнем углу -->
+    <div class="additional-btn"></div>
+</div>
+
+<!-- Заголовок -->
+<h1>Онлайн-прослушивание аудиоконтента</h1>
+
+<!-- Аудиоплеер -->
+<audio controls>
+    <source src="your-audio-file.mp3" type="audio/mp3">
+    Ваш браузер не поддерживает элемент audio.
+</audio>
+
+<!-- Контент -->
+<div class="content-container">
+    <!-- Кнопка "Подключиться" -->
+    <button class="connect-btn">Подключиться</button>
+    <!-- Текстовое поле с текстом -->
+    <textarea class="custom-textarea">QR</textarea>
+</div>
+
+<!-- Чат -->
+<textarea class="chat">чат</textarea>
+
+</body>
+</html>

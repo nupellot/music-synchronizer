@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Плейлист</title>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: grid;
+            grid-template-columns: 1fr 2fr 3fr 4fr 5fr 6fr ; /* Две колонки, первая занимает 1 часть, вторая 2 части */
+            gap: 20px; /* Расстояние между колонками */
+            margin: 20px;
+        }
+
+        #playlist {
+            grid-column: 6; /* Список треков в правой колонке */
+
+        }
+
+        .track {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="playlist">
+  <h1>Плейлист</h1>
+
+  <div class="track">
+    <h2>Трек 1</h2>
+    <p>Исполнитель: Исполнитель 1</p>
+    <p>Альбом: Альбом 1</p>
+  </div>
+
+  <div class="track">
+    <h2>Трек 2</h2>
+    <p>Исполнитель: Исполнитель 2</p>
+    <p>Альбом: Альбом 2</p>
+  </div>
+
+  <div class="track">
+    <h2>Трек 3</h2>
+    <p>Исполнитель: Исполнитель 3</p>
+    <p>Альбом: Альбом 3</p>
+  </div>
+
+  <!-- Добавьте больше блоков для каждого трека по необходимости -->
+</div>
+
+<div class="playlist-divider"></div>
+
+<!-- Дополнительный контент для справа от списка треков -->
+
+</body>
+</html>
