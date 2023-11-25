@@ -1,7 +1,6 @@
 # app.py
 import string
 import random
-from pydub import AudioSegment
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from mutagen.mp3 import MP3
@@ -14,7 +13,7 @@ socketio = SocketIO(app)
 class Room:
     def __init__(self):
         self.track = None
-        self.time_stamp = None
+        self.time_stamp = 0
         self.is_playing = False
 
         self.queue = []
@@ -89,6 +88,13 @@ def play(time_stamp):
 @socketio.on("seek")
 def seek(time_stamp):
     room.time_stamp = time_stamp
+    update_clients()
+
+
+@socketio.on("stop")
+def pause():
+    room.time_stamp = 0
+    room.is_playing = False
     update_clients()
 
 

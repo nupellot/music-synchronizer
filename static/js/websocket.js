@@ -28,7 +28,7 @@ function requestPause() {
 }
 
 function requestStop() {
-    socket.emit('stop', player.currentTime);
+    socket.emit('stop');
 }
 
 function requestSeek() {
@@ -62,5 +62,7 @@ socket.on("play", function play() {
 socket.on("stop", function stop() {
     player.pause();
     player.currentTime = 0;
+    let seeker = document.getElementById("seeker");
+    seeker.value = time_stamp / player.duration * seeker.max
     clearInterval(incrementSeeker)
 })
