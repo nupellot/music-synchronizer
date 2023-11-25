@@ -5,10 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Chat with Flask and WebSocket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/player.css') }}">
 </head>
 <body>
+    {% for track in room.queue %}
+        <audio src="static/music/{{ track }}" id="Player"></audio>
+        <div>
+            <button class="control-button play-button" onclick="requestPlay()">Play</button>
+            <button class="control-button pause-button" onclick="requestPause()">Pause</button>
+            <button class="control-button stop-button" onclick="requestStop()">Stop</button>
+            <input type="range" value="0" max="100" step="1" oninput="seek(event)">
+        </div>
+
+
+    {% endfor %}
     <ul id="chat">
-        {% for message in messages %}
+        {% for message in room.messages %}
             <li>{{ message }}</li>
         {% endfor %}
     </ul>
@@ -34,6 +46,45 @@
             socket.emit('new_message', message);
             messageInput.value = '';
         }
+
+
+        window.onload = function() {
+            player = document.getElementById("Player");
+        };
+
+        function requestPlay() {
+            socket.emit('play', {"timeStamp": player.currentTime});
+        }
+        function requestPause() {
+            socket.emit('pause', {"timeStamp": player.currentTime});
+        }
+        function requestStop() {
+            socket.emit('stop', {"timeStamp": player.currentTime});
+        }
+
+        function play() {
+            player.play();
+        }
+
+        function pause() {
+            player.pause();
+        }
+
+        function stop() {
+            player.pause();
+            player.currentTime = 0;
+        }
+
+        function seek(event) {
+            var percent = event.target.value / 100;
+            audio.currentTime = audio.duration * percent;
+        }
+
+        socket.on("pause", pause)
+        socket.on("play", play)
+        socket.on("stop", stop)
+
+
     </script>
 </body>
 </html>

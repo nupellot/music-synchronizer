@@ -12,7 +12,10 @@ socketio = SocketIO(app)
 
 class Room:
     def __init__(self):
-        self.queue = []
+        current_track = None
+        current_time_stamp = None
+
+        self.queue = ["1.mp3"]
         # Генерация 2 случайных цифр
         digits = ''.join(random.choices(string.digits, k=2))
         # Генерация 2 случайных букв
@@ -20,8 +23,9 @@ class Room:
         # Собираем код из цифр и букв
         random_code = letters + digits
         # Возвращаем сгенерированный код
-        self.code = random_code
+        self.code = random_code.upper()
         self.messages = [f"Комната {self.code} создана"]
+
 
 
 
@@ -30,7 +34,7 @@ room = Room()
 
 @app.route('/')
 def index():
-    return render_template('index_chat.html', messages=room.messages)
+    return render_template('index_chat.html', room=room)
 
 @socketio.on('new_message')
 def handle_message(data):
