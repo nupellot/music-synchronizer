@@ -1,12 +1,8 @@
 [build]
 builder = "nixpacks"
-[build.nixpacksPlan.phases.setup]
-nixPkgs = ["...", "python38"]
-[build.nixpacksPlan.phases.install]
-dependsOn = ["setup"]
-cmds = ["...", "python -m venv --copies /opt/venv", ". /opt/venv/bin/activate", "pip install -r requirements.txt"]
 [deploy]
 startCommand = "python app.py"
-healthcheckPath = "/"
-healthcheckTimeout = 100
-restartPolicyType = "never"
+numReplicas = 1
+sleepApplication = false
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
