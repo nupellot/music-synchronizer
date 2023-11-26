@@ -72,12 +72,12 @@ function toggleMute() {
     // Переключение между включенным и выключенным состоянием звука
     player.muted = !player.muted;
     if (player.muted) {
-        $(".unmuted-icon").style.display = "none"
-        $(".muted-icon").style.display = "block"
+        $(".unmuted-icon").css("display", "none")
+        $(".muted-icon").css("display", "block")
     }
     if (!player.muted) {
-        $(".unmuted-icon").style.display = "block"
-        $(".muted-icon").style.display = "none"
+        $(".unmuted-icon").css("display", "block")
+        $(".muted-icon").css("display", "none")
     }
 
     // Вывод значения в консоль (или можно использовать его для чего-то еще)
