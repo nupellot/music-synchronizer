@@ -139,8 +139,13 @@ def ended():
     room.time_stamp = 0
     room.current_track = room.queue[(room.queue.index(room.current_track) + 1) % len(room.queue)]
     with open(room.current_track["filename"], "rb") as file:
-        next_track = file.read()
-        socketio.emit("next_track", next_track)
+        next_track_file = file.read()
+        socketio.emit("next_track", {
+            "next_track_file": next_track_file,
+            "title": room.current_track["title"],
+            "author": room.current_track["author"],
+            "duration": room.current_track["duration"]
+        })
     play()
 
 

@@ -75,8 +75,10 @@ socket.on('next_track', function(next_track) {
     console.log('Получены данные MP3');
 
     // Создание Blob из бинарных данных и установка его в аудиоплеер
-    var blob = new Blob([next_track], { type: 'audio/mp3' });
+    var blob = new Blob([next_track["next_track_file"]], { type: 'audio/mp3' });
     player.src = URL.createObjectURL(blob);
+    $(".player-author").text(next_track["author"])
+    $(".player-title").text(next_track["title"])
 });
 
 
