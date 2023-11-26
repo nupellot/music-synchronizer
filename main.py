@@ -76,4 +76,4 @@ def seek(time_stamp):
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True, allow_unsafe_werkzeug=True)
+    socketio.run(app, debug=True, allow_unsafe_werkzeug=True, host='0.0.0.0')
