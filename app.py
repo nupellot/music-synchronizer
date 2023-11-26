@@ -75,7 +75,7 @@ room.add_to_queue("Despacito", "Some spanish dude", "1.mp3")
 
 
 @socketio.on('connect')
-def new_message(data):
+def new_connection(data):
     print('New connection:', data)
     update_clients()
 
