@@ -5,6 +5,7 @@ import random
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from mutagen.mp3 import MP3
+import qrcode
 from database.sql_provider import SQLProvider
 
 app = Flask(__name__)
@@ -25,9 +26,32 @@ class Room:
         random_code = letters + digits
         # Возвращаем сгенерированный код
         self.code = random_code.upper()
+        self.create_QRCode()
         self.messages = [f"Комната {self.code} создана"]
         self.add_to_queue("Elegant Name", "Author Unknown", "1.mp3")
         self.current_track = self.queue[-1]
+
+    def create_QRCode(self):
+        # Создание объекта QRCode
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=15,
+            border=2,
+        )
+
+        # Добавление данных в объект QRCode
+        qr.add_data(self.code)
+        qr.make(fit=True)
+
+        # Создание изображения QR-кода
+        img = qr.make_image(
+            fill_color="red",
+            back_color="white"
+        )
+
+        # Сохранение изображения
+        img.save(f"static/QRCodes/{self.code}.png")
 
     def add_to_queue(self, title: str, author: str, filename: str):
         print("adding to queue")

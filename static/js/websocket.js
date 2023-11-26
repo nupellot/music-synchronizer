@@ -1,7 +1,7 @@
 var socket = io.connect('http://' + document.domain + ':' + location.port);
 
 socket.on('new_message', function(data) {
-    var chat = document.getElementById('chat');
+    var chat = document.getElementById('chat-messages');
     var newMessage = document.createElement('li');
     newMessage.textContent = data;
     chat.appendChild(newMessage);

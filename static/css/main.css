@@ -36,20 +36,16 @@ main {
     background: #8f8f8f;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .code-block {
-    outline: 1px solid red;
+    /*outline: 1px solid red;*/
     max-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.chat-block {
-    display: none;
 }
 
 .qr-code {
@@ -58,6 +54,38 @@ main {
     width: 200px;
     height: 200px;
 }
+
+.text-code {
+    font-family: "MTS wide bold", sans-serif;
+    font-size: 1.8rem;
+}
+
+
+.chat-block {
+    border-radius: 25px;
+    padding: 15px 10px 5px 10px;
+    background: #dedede;
+    width: 80%;
+    margin: auto;
+}
+
+.chat-form {
+    width: 100%;
+}
+
+.chat-title {
+    font-family: "MTS text regular", sans-serif;
+}
+
+.chat-messages {
+    max-height: 40%;
+}
+
+.chat-messages > li {
+    text-decoration: none;
+    margin: 5px;
+}
+
 
 
 
@@ -118,7 +146,7 @@ main {
 
 
 .upload-container {
-    border: 2px dashed red;
+    border: 2px dashed rgba(255, 0, 0, 0.24);
     border-radius: 8px;
     padding: 20px;
     text-align: center;
@@ -131,7 +159,7 @@ main {
 
 .upload-container:hover {
     /*border-color: #2980b9;*/
-    border: 5px solid red;
+    border: 5px solid rgba(255, 0, 0, 0.6);
     /*border-radius: 0;*/
 }
 

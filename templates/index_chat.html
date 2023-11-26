@@ -13,19 +13,23 @@
 <main>
     <div class="left-part">
         <div class="code-block">
-            <img class="qr-code" src="" alt="">
+            <img class="qr-code" src="static/QRCodes/{{ room.code }}.png" alt="">
 
             <div class="text-code">{{ room.code }}</div>
 
-            <input type="text" class="code-input" placeholder="Код комнаты">
+{#            <input type="text" class="code-input" placeholder="Код комнаты">#}
         </div>
         <div class="chat-block">
             <div class="chat-title">Чат комнаты</div>
-            <div class="chat-messages">
+            <input class="chat-messages" id="chat-messages" type="text" value="
                 {% for message in room.messages %}
-                    <li>{{ message }}</li>
+                    {{ message }}
                 {% endfor %}
-            </div>
+            ">
+            <form action="" class="chat-form" id="form" onsubmit="sendMessage(); return false;">
+                <input type="text" id="message_input" autocomplete="off" placeholder="Type your message...">
+                <button type="submit">Отправить</button>
+            </form>
         </div>
     </div>
 
