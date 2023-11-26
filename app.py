@@ -2,6 +2,8 @@
 import math
 import string
 import random
+import time
+
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from mutagen.mp3 import MP3
@@ -16,7 +18,7 @@ class Room:
     def __init__(self):
         self.time_stamp = 0
         self.is_playing = False
-
+        self.last_pressed_play = 0
         self.queue = []
         # Генерация 2 случайных цифр
         digits = ''.join(random.choices(string.digits, k=2))
@@ -101,26 +103,28 @@ def update_clients():
         socketio.emit('play')
     if not room.is_playing:
         socketio.emit('pause')
+    room.time_stamp += time.time() - room.last_pressed_play
     socketio.emit('seek', room.time_stamp)
 
 
 @socketio.on("pause")
-def pause(time_stamp):
-    room.time_stamp = time_stamp
+def pause():
     room.is_playing = False
     update_clients()
 
 
 @socketio.on("play")
-def play(time_stamp):
-    room.time_stamp = time_stamp
+def play():
     room.is_playing = True
+    room.last_pressed_play = time.time()
     update_clients()
 
 
 @socketio.on("seek")
 def seek(time_stamp):
     room.time_stamp = time_stamp
+    if room.is_playing:
+        room.last_pressed_play = time.time()
     update_clients()
 
 

@@ -20,11 +20,11 @@ window.onload = function() {
 };
 
 function requestPlay() {
-    socket.emit('play', player.currentTime);
+    socket.emit('play');
 }
 
 function requestPause() {
-    socket.emit('pause', player.currentTime);
+    socket.emit('pause');
 }
 
 function requestStop() {
