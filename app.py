@@ -1,4 +1,5 @@
 # app.py
+import math
 import string
 import random
 from flask import Flask, render_template
@@ -40,7 +41,7 @@ class Room:
         print("address ", address)
         f = MP3(address)
         # print(AudioSegment.from_mp3(self.queue[-1]["filename"]))
-        self.queue[-1]["duration"] = f.info.length
+        self.queue[-1]["duration"] = str(math.floor(f.info.length / 60)) + ":" + str(math.floor(f.info.length % 60))
         print("duration added")
 
 

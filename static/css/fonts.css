@@ -37,3 +37,13 @@
        /* Если не получилось, загрузит woff2 */
        url("../fonts/MTSWide-Regular.woff2") format("woff2")
 }
+
+@font-face {
+  font-family: "MTS compact bold";
+  font-style: normal;
+  font-weight: 400;
+  /* Браузер сначала попробует найти шрифт локально */
+  src: local("MTS compact bold"),
+       /* Если не получилось, загрузит woff2 */
+       url("../fonts/MTSCompact-Bold.woff2") format("woff2")
+}
