@@ -31,7 +31,7 @@ class Room:
         self.create_QRCode()
         self.messages = [f"Комната {self.code} создана"]
         self.add_to_queue("Elegant Name", "Author Unknown", "1.mp3")
-        self.current_track = self.queue[-1]
+        self.current_track = self.queue[0]
 
     def create_QRCode(self):
         # Создание объекта QRCode
@@ -66,14 +66,13 @@ class Room:
         address = self.queue[-1]["filename"]
         print("address ", address)
         f = MP3(address)
-        # print(AudioSegment.from_mp3(self.queue[-1]["filename"]))
         self.queue[-1]["duration"] = str(math.floor(f.info.length / 60)) + ":" + str(math.floor(f.info.length % 60))
         print("duration added")
 
 
 room = Room()
 room.add_to_queue("Ya russkiy", "SHaman", "1.mp3")
-room.add_to_queue("Despacito", "Some spanish dude", "1.mp3")
+room.add_to_queue("Despacito", "Some spanish dude", "2.mp3")
 
 
 @socketio.on('connect')
@@ -133,6 +132,16 @@ def pause():
     room.time_stamp = 0
     room.is_playing = False
     update_clients()
+
+
+@socketio.on("ended")
+def ended():
+    room.time_stamp = 0
+    room.current_track = room.queue[(room.queue.index(room.current_track) + 1) % len(room.queue)]
+    with open(room.current_track["filename"], "rb") as file:
+        next_track = file.read()
+        socketio.send(next_track)
+    play()
 
 
 if __name__ == '__main__':

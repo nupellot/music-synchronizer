@@ -14,9 +14,13 @@ function sendMessage() {
     messageInput.value = '';
 }
 
-
+var player = document.getElementById("Player");
 window.onload = function() {
-    player = document.getElementById("Player");
+    // player = document.getElementById("Player");
+    player.addEventListener('ended', function() {
+    console.log('Воспроизведение завершено');
+    socket.emit("ended")
+    });
 };
 
 function requestPlay() {
@@ -45,6 +49,7 @@ function incrementSeeker() {
 }
 
 
+
 socket.on("seek", function (time_stamp) {
     player.currentTime = time_stamp;
     let seeker = document.getElementById("seeker");
@@ -66,6 +71,14 @@ socket.on("stop", function stop() {
     seeker.value = time_stamp / player.duration * seeker.max
     clearInterval(incrementSeeker)
 })
+socket.on('message', function(next_track) {
+    console.log('Получены данные MP3');
+
+    // Создание Blob из бинарных данных и установка его в аудиоплеер
+    var blob = new Blob([next_track], { type: 'audio/mp3' });
+    player.src = URL.createObjectURL(blob);
+});
+
 
 
 function toggleMute() {
@@ -83,6 +96,11 @@ function toggleMute() {
     // Вывод значения в консоль (или можно использовать его для чего-то еще)
     // console.log('Audio muted:', player.muted);
 }
+
+
+
+
+
 
 
 
