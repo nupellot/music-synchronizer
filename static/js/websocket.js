@@ -71,7 +71,7 @@ socket.on("stop", function stop() {
     seeker.value = time_stamp / player.duration * seeker.max
     clearInterval(incrementSeeker)
 })
-socket.on('message', function(next_track) {
+socket.on('next_track', function(next_track) {
     console.log('Получены данные MP3');
 
     // Создание Blob из бинарных данных и установка его в аудиоплеер
