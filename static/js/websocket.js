@@ -24,12 +24,21 @@ window.onload = function() {
 };
 
 function requestPlay() {
-    socket.emit('play');
+    if (player.paused) {
+        socket.emit("play")
+        $(".play-icon").css("display", "none")
+        $(".pause-icon").css("display", "block")
+    } else
+    if (!player.paused) {
+        socket.emit('pause');
+        $(".play-icon").css("display", "block")
+        $(".pause-icon").css("display", "none")
+    }
 }
 
-function requestPause() {
-    socket.emit('pause');
-}
+// function requestPause() {
+//     socket.emit('pause');
+// }
 
 function requestStop() {
     socket.emit('stop');
@@ -56,15 +65,15 @@ socket.on("seek", function (time_stamp) {
     console.log("seeker.max" + seeker.max)
     seeker.value = time_stamp / player.duration * seeker.max
 })
-socket.on("pause", function pause() {
+socket.on("pause", function () {
     player.pause();
     clearInterval(incrementSeeker)
 })
-socket.on("play", function play() {
+socket.on("play", function () {
     player.play();
     setInterval(incrementSeeker, 1000);
 })
-socket.on("stop", function stop() {
+socket.on("stop", function () {
     player.pause();
     player.currentTime = 0;
     let seeker = document.getElementById("seeker");

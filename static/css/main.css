@@ -31,7 +31,7 @@ main {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 1.5fr 5fr;
+    grid-template-columns: 2.5fr 5fr;
     margin: 0;
     padding: 0;
 }
@@ -164,10 +164,6 @@ main {
 }
 
 
-
-
-
-
 .upload-container {
     opacity: 0.5;
     border: 2px dashed rgb(255, 0, 0);
@@ -216,7 +212,7 @@ main {
     background: rgba(51, 51, 51, 0.6);
     /*width: 100%;*/
     /*box-sizing: border-box;*/
-    height: 50px;
+    /*height: 50px;*/
     /*position: absolute;*/
     /*bottom: 0;*/
     /*right: 0;*/
@@ -224,8 +220,8 @@ main {
     justify-self: flex-end;
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding: 5px 15px 5px 15px;
+    /*justify-content: space-between;*/
+    padding: 5px 10px 5px 10px;
     border-radius: 25px;
 }
 
@@ -234,6 +230,14 @@ main {
     padding: 10px;
     border-radius: 50%;
     transition: 0.2s ease-out;
+    /*outline: 1px solid red;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-button:hover {
+    background: gray;
 }
 
 .control-button > svg {
@@ -246,6 +250,8 @@ main {
     flex-direction: column;
     justify-content: space-between;
     min-width: 70%;
+    flex-grow: 1;
+    margin: 0 25px 0 25px;
 }
 
 .seeker {
@@ -257,7 +263,7 @@ main {
     margin-right: 0;
 }
 
-.muted-icon {
+.muted-icon, .pause-icon {
     display: none;
 }
 
