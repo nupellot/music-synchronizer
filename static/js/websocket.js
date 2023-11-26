@@ -44,7 +44,7 @@ function requestSeek() {
 
 function incrementSeeker() {
     let seeker = document.getElementById("seeker");
-    console.log("seeker.max" + seeker.max)
+    // console.log("seeker.max" + seeker.max)
     seeker.value = player.currentTime / player.duration * seeker.max
 }
 
@@ -71,12 +71,33 @@ socket.on("stop", function stop() {
     seeker.value = time_stamp / player.duration * seeker.max
     clearInterval(incrementSeeker)
 })
+
+function musicJiggler() {
+    let tracks = $('.track');
+    // Перебираем найденные div
+    for (let i = 0; i < tracks.length; i++) {
+        let track = tracks[i];
+        let icon = track.getElementsByClassName("track-icon")[0]
+
+
+        // Получаем детей div
+        if (track.getElementsByClassName("track-title")[0].innerText === next_track["title"] && track.getElementsByClassName("track-author")[0].innerText === next_track["author"]) {
+            icon.classList.add("active")
+        } else {
+            if (icon.classList.contains("active")) {
+                icon.classList.remove("active");
+            }
+        }
+    }
+}
+
 socket.on('next_track', function(next_track) {
     console.log('Получены данные MP3');
 
     // Создание Blob из бинарных данных и установка его в аудиоплеер
     var blob = new Blob([next_track["next_track_file"]], { type: 'audio/mp3' });
     player.src = URL.createObjectURL(blob);
+
     $(".player-author").text(next_track["author"])
     $(".player-title").text(next_track["title"])
 });

@@ -13,7 +13,7 @@
 <main>
     <div class="left-part">
         <div class="code-block">
-            <img class="qr-code" src="static/QRCodes/{{ room.code }}.png" alt="">
+            <img class="qr-code fancy" src="static/QRCodes/{{ room.code }}.png" alt="">
 
             <div class="text-code">{{ room.code }}</div>
 
@@ -38,7 +38,7 @@
             <div class="queue-title">Очередь треков</div>
 
             {% for track in room.queue %}
-                <div class="track">
+                <div class="track fancy">
                     <svg xmlns="http://www.w3.org/2000/svg" class="track-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M13 17a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M9 17v-13h10v13" /><path d="M9 8h10" /></svg>
                     <div class="track-author">{{ track["author"] }}</div>
                     <span>-</span>
