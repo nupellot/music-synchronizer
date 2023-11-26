@@ -2,6 +2,7 @@
 import string
 import random
 import os
+from gevent.pywsgi import WSGIServer
 
 from flask import Flask, render_template
 from flask_socketio import SocketIO
@@ -79,6 +80,8 @@ def seek(time_stamp):
 if __name__ == '__main__':
     try:
         port = os.environ["PORT"]
+        http_server = WSGIServer(('0.0.0.0', int(port)), app)
+        http_server.serve_forever()
     except KeyError:
-        port = 5000
-    socketio.run(app, debug=True, allow_unsafe_werkzeug=True, host='0.0.0.0', port=port)
+        socketio.run(app, debug=True, allow_unsafe_werkzeug=True, host='0.0.0.0')
+
