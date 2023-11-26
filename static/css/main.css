@@ -71,22 +71,28 @@ main {
 }
 
 .right-part > * {
-    outline: 1px solid blue;
+    /*outline: 1px solid blue;*/
 }
 
 
 
 
 .upload-container {
-    border: 2px dashed #3498db;
+    border: 2px dashed red;
     border-radius: 8px;
     padding: 20px;
     text-align: center;
     cursor: pointer;
+    width: 50%;
+    margin: auto;
+    font-family: "MTS wide regular", sans-serif;
+    transition: 0.1s ease-out;
 }
 
 .upload-container:hover {
-    border-color: #2980b9;
+    /*border-color: #2980b9;*/
+    border: 5px solid red;
+    /*border-radius: 0;*/
 }
 
 .upload-container input[type="file"] {
@@ -95,7 +101,7 @@ main {
 
 .upload-icon {
     font-size: 36px;
-    color: #3498db;
+    color: red;
     margin-bottom: 10px;
 }
 
