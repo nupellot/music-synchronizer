@@ -73,8 +73,8 @@ class Room:
 
 
 room = Room()
-room.add_to_queue("Ya russkiy", "SHaman", "1.mp3")
-room.add_to_queue("Despacito", "Some spanish dude", "2.mp3")
+room.add_to_queue("Из окна", "Noize MC (На самом деле нет)", "2.mp3")
+room.add_to_queue("Despacito", "Some spanish dude", "3.mp3")
 
 
 @socketio.on('connect')
