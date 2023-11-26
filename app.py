@@ -74,6 +74,12 @@ room.add_to_queue("Ya russkiy", "SHaman", "1.mp3")
 room.add_to_queue("Despacito", "Some spanish dude", "1.mp3")
 
 
+@socketio.on('connect')
+def new_message(data):
+    print('New connection:', data)
+    update_clients()
+
+
 @app.route('/')
 def index():
     return render_template('index_chat.html', room=room)
