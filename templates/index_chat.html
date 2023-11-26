@@ -43,8 +43,10 @@
             {% endfor %}
         </div>
 
-        <div class="tracks-input-area">
-            <input type="file" multiple>
+        <div class="upload-container" id="uploadContainer">
+            <div class="upload-icon">&#8686;</div>
+            <div class="upload-text">Drag & Drop or Click to Upload</div>
+            <input type="file" id="fileInput" multiple>
         </div>
 
         <audio src="{{ room.queue[-1]["filename"] }}" id="Player"></audio>

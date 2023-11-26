@@ -83,3 +83,43 @@ function toggleMute() {
     // Вывод значения в консоль (или можно использовать его для чего-то еще)
     // console.log('Audio muted:', player.muted);
 }
+
+
+
+var uploadContainer = document.getElementById('uploadContainer');
+var fileInput = document.getElementById('fileInput');
+
+function handleDragOver(e) {
+    e.preventDefault();
+    uploadContainer.classList.add('dragover');
+}
+
+function handleDragLeave() {
+    uploadContainer.classList.remove('dragover');
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    uploadContainer.classList.remove('dragover');
+    var files = e.dataTransfer.files;
+    handleFiles(files);
+}
+
+function handleFiles(files) {
+    // Обработка выбранных файлов
+    console.log(files);
+}
+
+uploadContainer.addEventListener('dragover', handleDragOver);
+uploadContainer.addEventListener('dragleave', handleDragLeave);
+uploadContainer.addEventListener('drop', handleDrop);
+
+fileInput.addEventListener('change', function() {
+    var files = fileInput.files;
+    handleFiles(files);
+});
+
+// Добавлен обработчик события click
+uploadContainer.addEventListener('click', function() {
+    fileInput.click();
+});

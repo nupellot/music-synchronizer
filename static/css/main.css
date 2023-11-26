@@ -74,6 +74,43 @@ main {
     outline: 1px solid blue;
 }
 
+
+
+
+.upload-container {
+    border: 2px dashed #3498db;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload-container:hover {
+    border-color: #2980b9;
+}
+
+.upload-container input[type="file"] {
+    display: none;
+}
+
+.upload-icon {
+    font-size: 36px;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.upload-text {
+    color: #333;
+}
+
+.upload-container.dragover {
+    border-color: #27ae60;
+    background-color: #ecf0f1;
+}
+
+
+
+
 .player {
     font-family: "MTS wide regular", sans-serif;
     color: white;
