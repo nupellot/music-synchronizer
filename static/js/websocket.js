@@ -66,3 +66,20 @@ socket.on("stop", function stop() {
     seeker.value = time_stamp / player.duration * seeker.max
     clearInterval(incrementSeeker)
 })
+
+
+function toggleMute() {
+    // Переключение между включенным и выключенным состоянием звука
+    player.muted = !player.muted;
+    if (player.muted) {
+        $(".unmuted-icon").style.display = "none"
+        $(".muted-icon").style.display = "block"
+    }
+    if (!player.muted) {
+        $(".unmuted-icon").style.display = "block"
+        $(".muted-icon").style.display = "none"
+    }
+
+    // Вывод значения в консоль (или можно использовать его для чего-то еще)
+    // console.log('Audio muted:', player.muted);
+}

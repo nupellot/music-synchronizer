@@ -12,7 +12,6 @@ socketio = SocketIO(app)
 
 class Room:
     def __init__(self):
-        self.track = None
         self.time_stamp = 0
         self.is_playing = False
 
@@ -26,6 +25,8 @@ class Room:
         # Возвращаем сгенерированный код
         self.code = random_code.upper()
         self.messages = [f"Комната {self.code} создана"]
+        self.add_to_queue("Elegant Name", "Author Unknown", "1.mp3")
+        self.current_track = self.queue[-1]
 
     def add_to_queue(self, title: str, author: str, filename: str):
         print("adding to queue")
@@ -44,7 +45,8 @@ class Room:
 
 
 room = Room()
-room.add_to_queue("Ya ebu sobak", "SHaman", "1.mp3")
+room.add_to_queue("Ya russkiy", "SHaman", "1.mp3")
+room.add_to_queue("Despacito", "Some spanish dude", "1.mp3")
 
 
 @app.route('/')

@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "MTS compact regular";
+  font-style: normal;
+  font-weight: 400;
+  /* Браузер сначала попробует найти шрифт локально */
+  src: local("MTS compact regular"),
+       /* Если не получилось, загрузит woff2 */
+       url("../fonts/MTSCompact-Regular.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: "MTS text regular";
+  font-style: normal;
+  font-weight: 400;
+  /* Браузер сначала попробует найти шрифт локально */
+  src: local("MTS text regular"),
+       /* Если не получилось, загрузит woff2 */
+       url("../fonts/MTSText-Regular.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: "MTS wide bold";
+  font-style: normal;
+  font-weight: 400;
+  /* Браузер сначала попробует найти шрифт локально */
+  src: local("MTS wide bold"),
+       /* Если не получилось, загрузит woff2 */
+       url("../fonts/MTSWide-Bold.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: "MTS wide regular";
+  font-style: normal;
+  font-weight: 400;
+  /* Браузер сначала попробует найти шрифт локально */
+  src: local("MTS wide regular"),
+       /* Если не получилось, загрузит woff2 */
+       url("../fonts/MTSWide-Regular.woff2") format("woff2")
+}

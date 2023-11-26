@@ -1,0 +1,130 @@
+@import url("fonts.css");
+
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: "MTS text regular", arial, sans-serif;
+}
+
+input, button {
+    background: none;
+    border: none;
+}
+
+button:active {
+    border: none;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 3.5fr 5fr;
+    margin: 0;
+    padding: 0;
+}
+
+.left-part, .right-part {
+    /*height: 100%;*/
+    padding: 30px;
+}
+
+.left-part {
+    background: #8f8f8f;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.code-block {
+    outline: 1px solid red;
+    max-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chat-block {
+    display: none;
+}
+
+.qr-code {
+    border: 5px solid gray;
+    border-radius: 25px;
+    width: 200px;
+    height: 200px;
+}
+
+
+
+
+.right-part {
+    background: #dedede;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /*position: relative;*/
+}
+
+.right-part > * {
+    outline: 1px solid blue;
+}
+
+.player {
+    font-family: "MTS wide regular", sans-serif;
+    color: white;
+    background: #333333;
+    /*width: 100%;*/
+    /*box-sizing: border-box;*/
+    height: 50px;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*right: 0;*/
+    /*border: 1px solid blue;*/
+    justify-self: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 5px 15px 5px 15px;
+    border-radius: 25px;
+}
+
+.control-button {
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    transition: 0.2s ease-out;
+}
+
+.control-button > svg {
+    width: 100%;
+    height: 100%;
+}
+
+.control-button:hover {
+    background: #494949;
+}
+
+.text-and-seek {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 70%;
+}
+
+.seeker {
+    margin: 0;
+    padding: 0;
+}
+
+.sound-button {
+    margin-right: 0;
+}
+
+.muted-icon {
+    display: none;
+}
