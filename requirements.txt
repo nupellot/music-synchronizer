@@ -1,0 +1,5 @@
+Flask==2.2.5
+Flask-SocketIO==5.3.6
+gevent==22.10.2
+mutagen==1.47.0
+qrcode==7.4.2

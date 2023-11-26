@@ -3,7 +3,9 @@ import math
 import string
 import random
 import time
+import os
 
+from gevent.pywsgi import WSGIServer
 from flask import Flask, render_template
 from flask_socketio import SocketIO
 from mutagen.mp3 import MP3
@@ -150,4 +152,9 @@ def ended():
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    try:
+        port = os.environ["PORT"]
+        http_server = WSGIServer(('0.0.0.0', int(port)), app)
+        http_server.serve_forever()
+    except KeyError:
+        socketio.run(app, debug=True, host='0.0.0.0')
