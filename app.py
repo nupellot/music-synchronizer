@@ -4,6 +4,7 @@ import string
 import random
 import time
 import os
+import asyncio
 
 from gevent.pywsgi import WSGIServer
 from flask import Flask, render_template
@@ -59,17 +60,32 @@ class Room:
 
     def add_to_queue(self, title: str, author: str, filename: str):
         print("adding to queue")
-        self.queue.append({
-            "title": title,
-            "author": author,
-            "filename": f"static/music/{filename}"
-        })
-        print("added")
+        with open(room.current_track["filename"], "rb") as file:
+            next_track_file = file.read()
+            self.queue.append({
+                "next_track_file": next_track_file,
+                "title": title,
+                "author": author,
+                "filename": f"static/music/{filename}"
+            })
+        print(f"added {self.queue[-1['title']]}")
         address = self.queue[-1]["filename"]
-        print("address ", address)
+        # print("address ", address)
         f = MP3(address)
         self.queue[-1]["duration"] = str(math.floor(f.info.length / 60)) + ":" + str(math.floor(f.info.length % 60))
-        print("duration added")
+        # print("duration added")
+
+    async def wait_for_next_track(self):
+        while True:
+            # Ждем заданное количество времени
+            await asyncio.sleep(self.current_track["duration"])
+            self.switch_to_next_track()
+            print(f"Играет трек: {self.current_track['title']}")
+            update_clients()
+
+    def switch_to_next_track(self):
+        self.current_track = self.queue[(self.queue.index(self.current_track) + 1) % len(self.queue)]
+        self.time_stamp = 0
 
 
 room = Room()
@@ -136,7 +152,7 @@ def pause():
     update_clients()
 
 
-@socketio.on("ended")
+# @socketio.on("ended")
 def ended():
     room.time_stamp = 0
     room.current_track = room.queue[(room.queue.index(room.current_track) + 1) % len(room.queue)]
